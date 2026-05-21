@@ -1,0 +1,23 @@
+{
+  "id": "conv-1779356755986-zggyfvjgp",
+  "providerId": "claude",
+  "title": "Respond to Korean greeting",
+  "titleGenerationStatus": "success",
+  "createdAt": 1779356755987,
+  "updatedAt": 1779356767274,
+  "lastResponseAt": 1779356765157,
+  "sessionId": "eb81340d-7f6c-43cc-803e-d0be27a4651f",
+  "providerState": {
+    "providerSessionId": "eb81340d-7f6c-43cc-803e-d0be27a4651f"
+  },
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 10,
+    "cacheCreationInputTokens": 31034,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 200000,
+    "contextTokens": 31044,
+    "percentage": 16,
+    "contextWindowIsAuthoritative": true
+  }
+}
