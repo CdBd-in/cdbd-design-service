@@ -1,0 +1,23 @@
+{
+  "id": "conv-1779371066860-ylr70fq0k",
+  "providerId": "claude",
+  "title": "The user has only sent a greeting (\"안녕\" - \"Hell...",
+  "titleGenerationStatus": "success",
+  "createdAt": 1779371066861,
+  "updatedAt": 1779371075387,
+  "lastResponseAt": 1779371073871,
+  "sessionId": "b2088ee3-ad0b-4051-a318-f4a12f9c08db",
+  "providerState": {
+    "providerSessionId": "b2088ee3-ad0b-4051-a318-f4a12f9c08db"
+  },
+  "usage": {
+    "model": "sonnet",
+    "inputTokens": 3,
+    "cacheCreationInputTokens": 3359,
+    "cacheReadInputTokens": 11157,
+    "contextWindow": 200000,
+    "contextTokens": 14519,
+    "percentage": 7,
+    "contextWindowIsAuthoritative": true
+  }
+}
