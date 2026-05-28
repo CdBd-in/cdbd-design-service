@@ -4,20 +4,20 @@
   "title": "Document CdBd lookbook design patterns",
   "titleGenerationStatus": "success",
   "createdAt": 1779941101221,
-  "updatedAt": 1779947121953,
-  "lastResponseAt": 1779947121953,
+  "updatedAt": 1779947216045,
+  "lastResponseAt": 1779947216045,
   "sessionId": "615d0c06-e63a-407f-be19-b88a0b4048b1",
   "providerState": {
     "providerSessionId": "615d0c06-e63a-407f-be19-b88a0b4048b1"
   },
   "usage": {
     "model": "opus",
-    "inputTokens": 7,
-    "cacheCreationInputTokens": 884,
-    "cacheReadInputTokens": 150870,
-    "contextWindow": 200000,
-    "contextTokens": 151761,
-    "percentage": 76,
+    "inputTokens": 2,
+    "cacheCreationInputTokens": 13295,
+    "cacheReadInputTokens": 118470,
+    "contextWindow": 1000000,
+    "contextTokens": 131767,
+    "percentage": 13,
     "contextWindowIsAuthoritative": true
   }
 }
