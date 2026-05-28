@@ -4,6 +4,21 @@
   "title": "화면 콘텐츠를 새 레이아웃 유형으로 변환",
   "titleGenerationStatus": "success",
   "createdAt": 1779957994645,
-  "updatedAt": 1779958007785,
-  "sessionId": null
+  "updatedAt": 1779959063621,
+  "lastResponseAt": 1779959063621,
+  "sessionId": "4e2ee5c4-9259-4ec0-83a7-dc0c86732026",
+  "providerState": {
+    "providerSessionId": "4e2ee5c4-9259-4ec0-83a7-dc0c86732026"
+  },
+  "currentNote": "룩북/규칙/시안.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 2,
+    "cacheCreationInputTokens": 2200,
+    "cacheReadInputTokens": 118305,
+    "contextWindow": 1000000,
+    "contextTokens": 120507,
+    "percentage": 12,
+    "contextWindowIsAuthoritative": true
+  }
 }
