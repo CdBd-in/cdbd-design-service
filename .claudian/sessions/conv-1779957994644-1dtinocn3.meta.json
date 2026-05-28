@@ -4,8 +4,8 @@
   "title": "화면 콘텐츠를 새 레이아웃 유형으로 변환",
   "titleGenerationStatus": "success",
   "createdAt": 1779957994645,
-  "updatedAt": 1779960405483,
-  "lastResponseAt": 1779960405483,
+  "updatedAt": 1779960639244,
+  "lastResponseAt": 1779960639244,
   "sessionId": "4e2ee5c4-9259-4ec0-83a7-dc0c86732026",
   "providerState": {
     "providerSessionId": "4e2ee5c4-9259-4ec0-83a7-dc0c86732026"
@@ -14,11 +14,11 @@
   "usage": {
     "model": "opus",
     "inputTokens": 2,
-    "cacheCreationInputTokens": 581,
-    "cacheReadInputTokens": 174934,
+    "cacheCreationInputTokens": 5887,
+    "cacheReadInputTokens": 185726,
     "contextWindow": 1000000,
-    "contextTokens": 175517,
-    "percentage": 18,
+    "contextTokens": 191615,
+    "percentage": 19,
     "contextWindowIsAuthoritative": true
   }
 }
