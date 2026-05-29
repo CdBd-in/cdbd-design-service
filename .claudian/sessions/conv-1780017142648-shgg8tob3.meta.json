@@ -4,8 +4,8 @@
   "title": "Initiate conversation",
   "titleGenerationStatus": "success",
   "createdAt": 1780017142648,
-  "updatedAt": 1780017158794,
-  "lastResponseAt": 1780017153964,
+  "updatedAt": 1780017189992,
+  "lastResponseAt": 1780017189992,
   "sessionId": "6a6e8691-2922-4e31-b741-f7572b79a134",
   "providerState": {
     "providerSessionId": "6a6e8691-2922-4e31-b741-f7572b79a134"
@@ -13,11 +13,12 @@
   "currentNote": "룩북/규칙/시안.md",
   "usage": {
     "model": "opus",
-    "inputTokens": 1,
-    "cacheCreationInputTokens": 16595,
-    "cacheReadInputTokens": 16463,
-    "contextWindow": 200000,
-    "contextTokens": 33059,
-    "percentage": 17
+    "inputTokens": 2,
+    "cacheCreationInputTokens": 5428,
+    "cacheReadInputTokens": 41795,
+    "contextWindow": 1000000,
+    "contextTokens": 47225,
+    "percentage": 5,
+    "contextWindowIsAuthoritative": true
   }
 }
