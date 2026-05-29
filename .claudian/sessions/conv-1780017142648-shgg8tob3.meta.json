@@ -4,12 +4,15 @@
   "title": "Initiate conversation",
   "titleGenerationStatus": "success",
   "createdAt": 1780017142648,
-  "updatedAt": 1780022585030,
-  "lastResponseAt": 1780022585030,
+  "updatedAt": 1780022998488,
+  "lastResponseAt": 1780022998487,
   "sessionId": "6a6e8691-2922-4e31-b741-f7572b79a134",
   "providerState": {
     "providerSessionId": "6a6e8691-2922-4e31-b741-f7572b79a134"
   },
+  "externalContextPaths": [
+    "/Users/leesunho/Downloads/마쥬"
+  ],
   "usage": {
     "model": "opus",
     "inputTokens": 2,
