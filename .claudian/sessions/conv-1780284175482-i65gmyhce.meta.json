@@ -4,8 +4,8 @@
   "title": "Design lookbook proof pages 01-03 with 2 variants",
   "titleGenerationStatus": "success",
   "createdAt": 1780284175483,
-  "updatedAt": 1780290329925,
-  "lastResponseAt": 1780290329925,
+  "updatedAt": 1780291003090,
+  "lastResponseAt": 1780291003090,
   "sessionId": "666ff511-15d5-4a47-bb30-36ffccc44301",
   "providerState": {
     "providerSessionId": "666ff511-15d5-4a47-bb30-36ffccc44301"
@@ -14,11 +14,11 @@
   "usage": {
     "model": "opus",
     "inputTokens": 1,
-    "cacheCreationInputTokens": 939,
-    "cacheReadInputTokens": 339395,
+    "cacheCreationInputTokens": 2293,
+    "cacheReadInputTokens": 366165,
     "contextWindow": 1000000,
-    "contextTokens": 340335,
-    "percentage": 34,
+    "contextTokens": 368459,
+    "percentage": 37,
     "contextWindowIsAuthoritative": true
   }
 }
