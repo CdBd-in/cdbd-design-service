@@ -4,8 +4,8 @@
   "title": "Review Figma design and update documentation",
   "titleGenerationStatus": "success",
   "createdAt": 1780303444144,
-  "updatedAt": 1780304109693,
-  "lastResponseAt": 1780304109693,
+  "updatedAt": 1780305726444,
+  "lastResponseAt": 1780305726444,
   "sessionId": "e5b0b0c2-911f-4d9a-b2ae-a1efd36a6d9c",
   "providerState": {
     "providerSessionId": "e5b0b0c2-911f-4d9a-b2ae-a1efd36a6d9c",
@@ -278,10 +278,11 @@
   "usage": {
     "model": "opus",
     "inputTokens": 1,
-    "cacheCreationInputTokens": 3078,
-    "cacheReadInputTokens": 58013,
-    "contextWindow": 200000,
-    "contextTokens": 61092,
-    "percentage": 31
+    "cacheCreationInputTokens": 1069,
+    "cacheReadInputTokens": 143039,
+    "contextWindow": 1000000,
+    "contextTokens": 144109,
+    "percentage": 14,
+    "contextWindowIsAuthoritative": true
   }
 }
