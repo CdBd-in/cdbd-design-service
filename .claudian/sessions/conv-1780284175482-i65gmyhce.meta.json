@@ -4,6 +4,21 @@
   "title": "Design lookbook proof pages 01-03 with 2 variants",
   "titleGenerationStatus": "success",
   "createdAt": 1780284175483,
-  "updatedAt": 1780284188864,
-  "sessionId": null
+  "updatedAt": 1780285690048,
+  "lastResponseAt": 1780285690048,
+  "sessionId": "666ff511-15d5-4a47-bb30-36ffccc44301",
+  "providerState": {
+    "providerSessionId": "666ff511-15d5-4a47-bb30-36ffccc44301"
+  },
+  "currentNote": "룩북/1. 제작 프로세스/1-2. 시안.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 44,
+    "cacheCreationInputTokens": 3247,
+    "cacheReadInputTokens": 232630,
+    "contextWindow": 1000000,
+    "contextTokens": 235921,
+    "percentage": 24,
+    "contextWindowIsAuthoritative": true
+  }
 }
