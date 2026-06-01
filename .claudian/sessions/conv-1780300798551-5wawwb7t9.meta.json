@@ -1,9 +1,24 @@
 {
   "id": "conv-1780300798551-5wawwb7t9",
   "providerId": "claude",
-  "title": "https://www",
-  "titleGenerationStatus": "pending",
+  "title": "Rename Figma frames sequentially 04-1 to 04-n",
+  "titleGenerationStatus": "success",
   "createdAt": 1780300798551,
-  "updatedAt": 1780300798556,
-  "sessionId": null
+  "updatedAt": 1780300863725,
+  "lastResponseAt": 1780300863725,
+  "sessionId": "2bad642c-7141-4885-9b47-2f2e241ed26b",
+  "providerState": {
+    "providerSessionId": "2bad642c-7141-4885-9b47-2f2e241ed26b"
+  },
+  "currentNote": "룩북/1. 제작 프로세스/1-4. CdBd 콘텐츠.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 6,
+    "cacheCreationInputTokens": 3329,
+    "cacheReadInputTokens": 64811,
+    "contextWindow": 1000000,
+    "contextTokens": 68146,
+    "percentage": 7,
+    "contextWindowIsAuthoritative": true
+  }
 }
