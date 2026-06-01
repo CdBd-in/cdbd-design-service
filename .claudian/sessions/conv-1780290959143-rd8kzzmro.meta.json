@@ -4,6 +4,21 @@
   "title": "Create lookbook A/B draft pages",
   "titleGenerationStatus": "success",
   "createdAt": 1780290959144,
-  "updatedAt": 1780290969451,
-  "sessionId": null
+  "updatedAt": 1780292953219,
+  "lastResponseAt": 1780292953219,
+  "sessionId": "bab1e91f-03e6-4a0f-ba50-da7d82af001c",
+  "providerState": {
+    "providerSessionId": "bab1e91f-03e6-4a0f-ba50-da7d82af001c"
+  },
+  "currentNote": "룩북/1. 제작 프로세스/1-2. 시안.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 1,
+    "cacheCreationInputTokens": 1164,
+    "cacheReadInputTokens": 274360,
+    "contextWindow": 1000000,
+    "contextTokens": 275525,
+    "percentage": 28,
+    "contextWindowIsAuthoritative": true
+  }
 }
