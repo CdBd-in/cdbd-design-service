@@ -4,8 +4,8 @@
   "title": "Create CdBd content documentation",
   "titleGenerationStatus": "success",
   "createdAt": 1780295791234,
-  "updatedAt": 1780303634402,
-  "lastResponseAt": 1780303634402,
+  "updatedAt": 1780303735453,
+  "lastResponseAt": 1780303735453,
   "sessionId": "33d357ea-abc8-4f72-a533-a2daad18e542",
   "providerState": {
     "providerSessionId": "33d357ea-abc8-4f72-a533-a2daad18e542",
@@ -298,10 +298,10 @@
   "usage": {
     "model": "opus",
     "inputTokens": 1,
-    "cacheCreationInputTokens": 969,
-    "cacheReadInputTokens": 454550,
+    "cacheCreationInputTokens": 803,
+    "cacheReadInputTokens": 457823,
     "contextWindow": 1000000,
-    "contextTokens": 455520,
+    "contextTokens": 458627,
     "percentage": 46,
     "contextWindowIsAuthoritative": true
   }
