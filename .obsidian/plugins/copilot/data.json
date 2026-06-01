@@ -330,6 +330,18 @@
         "reasoning"
       ],
       "apiKey": ""
+    },
+    {
+      "name": "gpt-5.3-codex",
+      "provider": "openai",
+      "enabled": true,
+      "apiKey": ""
+    },
+    {
+      "name": "gpt-5-codex",
+      "provider": "openai",
+      "enabled": true,
+      "apiKey": ""
     }
   ],
   "activeEmbeddingModels": [
