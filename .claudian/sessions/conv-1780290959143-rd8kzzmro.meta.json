@@ -4,8 +4,8 @@
   "title": "Create lookbook A/B draft pages",
   "titleGenerationStatus": "success",
   "createdAt": 1780290959144,
-  "updatedAt": 1780300912327,
-  "lastResponseAt": 1780300912327,
+  "updatedAt": 1780301170797,
+  "lastResponseAt": 1780301170797,
   "sessionId": "bab1e91f-03e6-4a0f-ba50-da7d82af001c",
   "providerState": {
     "providerSessionId": "bab1e91f-03e6-4a0f-ba50-da7d82af001c"
@@ -14,11 +14,11 @@
   "usage": {
     "model": "opus",
     "inputTokens": 1,
-    "cacheCreationInputTokens": 465,
-    "cacheReadInputTokens": 419978,
+    "cacheCreationInputTokens": 111,
+    "cacheReadInputTokens": 443473,
     "contextWindow": 1000000,
-    "contextTokens": 420444,
-    "percentage": 42,
+    "contextTokens": 443585,
+    "percentage": 44,
     "contextWindowIsAuthoritative": true
   }
 }
