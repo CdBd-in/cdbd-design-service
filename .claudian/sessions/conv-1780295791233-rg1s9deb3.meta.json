@@ -4,6 +4,21 @@
   "title": "Create CdBd content documentation",
   "titleGenerationStatus": "success",
   "createdAt": 1780295791234,
-  "updatedAt": 1780295808483,
-  "sessionId": null
+  "updatedAt": 1780296620563,
+  "lastResponseAt": 1780296620563,
+  "sessionId": "33d357ea-abc8-4f72-a533-a2daad18e542",
+  "providerState": {
+    "providerSessionId": "33d357ea-abc8-4f72-a533-a2daad18e542"
+  },
+  "currentNote": "룩북/1. 제작 프로세스/1-2. 시안.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 1,
+    "cacheCreationInputTokens": 970,
+    "cacheReadInputTokens": 124486,
+    "contextWindow": 1000000,
+    "contextTokens": 125457,
+    "percentage": 13,
+    "contextWindowIsAuthoritative": true
+  }
 }
