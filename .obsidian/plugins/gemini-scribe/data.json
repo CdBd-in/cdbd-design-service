@@ -3,7 +3,7 @@
   "ollamaBaseUrl": "http://localhost:11434",
   "customBaseUrl": "",
   "apiKeySecretName": "gemini-api-key",
-  "chatModelName": "gemini-flash-latest",
+  "chatModelName": "gemini-2.5-flash",
   "summaryModelName": "gemini-flash-latest",
   "completionsModelName": "gemini-flash-lite-latest",
   "imageModelName": "gemini-2.5-flash-image",
