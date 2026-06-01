@@ -4,6 +4,21 @@
   "title": "Access codex",
   "titleGenerationStatus": "success",
   "createdAt": 1780290970046,
-  "updatedAt": 1780290980815,
-  "sessionId": null
+  "updatedAt": 1780291076479,
+  "lastResponseAt": 1780291076479,
+  "sessionId": "0eb7df0a-cd89-4afd-8bd0-07bdd81ad391",
+  "providerState": {
+    "providerSessionId": "0eb7df0a-cd89-4afd-8bd0-07bdd81ad391"
+  },
+  "currentNote": "룩북/1. 제작 프로세스/1-2. 시안.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 1,
+    "cacheCreationInputTokens": 1431,
+    "cacheReadInputTokens": 73500,
+    "contextWindow": 1000000,
+    "contextTokens": 74932,
+    "percentage": 7,
+    "contextWindowIsAuthoritative": true
+  }
 }
