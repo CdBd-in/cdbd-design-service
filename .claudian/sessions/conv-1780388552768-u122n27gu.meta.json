@@ -1,0 +1,24 @@
+{
+  "id": "conv-1780388552768-u122n27gu",
+  "providerId": "claude",
+  "title": "Check OG image logo sizing rules",
+  "titleGenerationStatus": "success",
+  "createdAt": 1780388552768,
+  "updatedAt": 1780388585345,
+  "lastResponseAt": 1780388585345,
+  "sessionId": "3f410da9-268a-4575-b29b-24294c4324d2",
+  "providerState": {
+    "providerSessionId": "3f410da9-268a-4575-b29b-24294c4324d2"
+  },
+  "currentNote": "룩북/2. 디자인 가이드/2-1. 공통.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 1,
+    "cacheCreationInputTokens": 10352,
+    "cacheReadInputTokens": 38258,
+    "contextWindow": 1000000,
+    "contextTokens": 48611,
+    "percentage": 5,
+    "contextWindowIsAuthoritative": true
+  }
+}
