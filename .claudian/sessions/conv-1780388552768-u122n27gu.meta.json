@@ -4,8 +4,8 @@
   "title": "Check OG image logo sizing rules",
   "titleGenerationStatus": "success",
   "createdAt": 1780388552768,
-  "updatedAt": 1780391735226,
-  "lastResponseAt": 1780391735226,
+  "updatedAt": 1780393164762,
+  "lastResponseAt": 1780393164762,
   "sessionId": "3f410da9-268a-4575-b29b-24294c4324d2",
   "providerState": {
     "providerSessionId": "3f410da9-268a-4575-b29b-24294c4324d2",
@@ -547,11 +547,11 @@
   "usage": {
     "model": "opus",
     "inputTokens": 1,
-    "cacheCreationInputTokens": 529,
-    "cacheReadInputTokens": 308559,
+    "cacheCreationInputTokens": 648,
+    "cacheReadInputTokens": 456719,
     "contextWindow": 1000000,
-    "contextTokens": 309089,
-    "percentage": 31,
+    "contextTokens": 457368,
+    "percentage": 46,
     "contextWindowIsAuthoritative": true
   }
 }
