@@ -4,8 +4,8 @@
   "title": "Learn photo positioning framework",
   "titleGenerationStatus": "success",
   "createdAt": 1780387939862,
-  "updatedAt": 1780390447900,
-  "lastResponseAt": 1780390447900,
+  "updatedAt": 1780391760002,
+  "lastResponseAt": 1780391760002,
   "sessionId": "8ab87b4a-1c9c-4d9a-8079-0d38f025ed68",
   "providerState": {
     "providerSessionId": "8ab87b4a-1c9c-4d9a-8079-0d38f025ed68"
@@ -14,11 +14,11 @@
   "usage": {
     "model": "opus",
     "inputTokens": 1,
-    "cacheCreationInputTokens": 343,
-    "cacheReadInputTokens": 239250,
+    "cacheCreationInputTokens": 647,
+    "cacheReadInputTokens": 338254,
     "contextWindow": 1000000,
-    "contextTokens": 239594,
-    "percentage": 24,
+    "contextTokens": 338902,
+    "percentage": 34,
     "contextWindowIsAuthoritative": true
   }
 }
