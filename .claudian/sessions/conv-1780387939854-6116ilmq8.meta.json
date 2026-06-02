@@ -4,6 +4,21 @@
   "title": "Learn photo positioning framework",
   "titleGenerationStatus": "success",
   "createdAt": 1780387939862,
-  "updatedAt": 1780387956663,
-  "sessionId": null
+  "updatedAt": 1780388048086,
+  "lastResponseAt": 1780388048086,
+  "sessionId": "8ab87b4a-1c9c-4d9a-8079-0d38f025ed68",
+  "providerState": {
+    "providerSessionId": "8ab87b4a-1c9c-4d9a-8079-0d38f025ed68"
+  },
+  "currentNote": "룩북/2. 디자인 가이드/2-4. 화보·상품.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 6,
+    "cacheCreationInputTokens": 39248,
+    "cacheReadInputTokens": 0,
+    "contextWindow": 1000000,
+    "contextTokens": 39254,
+    "percentage": 4,
+    "contextWindowIsAuthoritative": true
+  }
 }
