@@ -78,31 +78,47 @@ local function escapeAS(s)
   return (s:gsub("\\", "\\\\"):gsub('"', '\\"'))
 end
 
--- Quick Actions(Cmd+/) 호출 → 검색어 입력 → Enter
--- 방식: System Events keystroke (raw eventtap보다 견고; 포커스 + IME 안정)
+-- Quick Actions 호출 → 검색어 입력 → Enter
+-- 방식: hs.application:selectMenuItem({"Figma", "Actions…"})로 메뉴 직접 호출
+-- (Cmd+/ 키스트로크는 Figma까지 도달은 하지만 Actions 열기로 처리되지 않는 케이스 확인됨)
 -- ⚠️ Escape는 Figma 선택을 해제하므로 절대 쓰지 않는다.
 local function runQuickAction(query)
   local prev = ensureEnglishInput()
+  local figma = findFigma()
+  if not figma then return false, "figma_not_running" end
+  figma:activate(); sleepMs(250)
+
+  print("[figma-ai-bridge] selectMenuItem {Figma, Actions…}")
+  local ok = figma:selectMenuItem({ "Figma", "Actions…" })
+  if not ok then
+    -- 폴백: 메뉴 path 변형 시도
+    ok = figma:selectMenuItem({ "Figma", "Actions" })
+    print(string.format("[figma-ai-bridge] fallback Actions (no ellipsis) → %s", tostring(ok)))
+  end
+  if not ok then
+    print("[figma-ai-bridge] selectMenuItem FAILED")
+    restoreInputSource(prev)
+    return false, "actions_menu_not_found"
+  end
+  sleepMs(500)  -- Quick Actions 패널 열림 + 검색창 포커스 대기
+
+  -- 검색어 입력 (Quick Actions 검색창에 들어감)
   local q = escapeAS(query)
-  local script = string.format([[
+  local typeScript = string.format([[
     tell application "System Events"
-      tell process "Figma"
-        set frontmost to true
-        delay 0.25
-        keystroke "/" using command down
-        delay 0.55
-        keystroke "%s"
-        delay 0.30
-        key code 36   -- Return
-      end tell
+      delay 0.1
+      keystroke "%s"
+      delay 0.30
+      key code 36
     end tell
   ]], q)
-  print("[figma-ai-bridge] runQuickAction via AppleScript, query=" .. q)
-  local ok, _, raw = hs.osascript.applescript(script)
-  if not ok then
+  print("[figma-ai-bridge] typing query into Actions box: " .. q)
+  local okScript, _, raw = hs.osascript.applescript(typeScript)
+  if not okScript then
     print("[figma-ai-bridge] AppleScript error: " .. tostring(raw))
   end
   restoreInputSource(prev)
+  return true
 end
 
 -- 디버그: Figma에 단순 문자열만 입력 (Cmd+/ 없음, Enter 없음)
@@ -194,6 +210,32 @@ local function dispatch(method, path, _, body)
   elseif method == "POST" and path == "/v1/open-console" then
     hs.openConsole()
     return jsonOk({ ok = true })
+  elseif method == "POST" and path == "/v1/cmd-slash" then
+    -- Cmd+/ ONLY (no typing, no Enter) — Quick Actions 단독 트리거 테스트
+    local figma = findFigma()
+    if not figma then return jsonErr(409, "figma_not_running") end
+    figma:activate(); sleepMs(300)
+    print("[figma-ai-bridge] /v1/cmd-slash: sending Cmd+/ via eventtap")
+    hs.eventtap.keyStroke({ "cmd" }, "/")
+    return jsonOk({ ok = true })
+  elseif method == "POST" and path == "/v1/menu-dump" then
+    -- Figma의 메뉴 트리를 덤프 → 통신 자체가 되는지 + 'Remove background' 메뉴 위치 확인
+    local figma = findFigma()
+    if not figma then return jsonErr(409, "figma_not_running") end
+    local menu = figma:getMenuItems() or {}
+    local function trim(items, depth)
+      if depth <= 0 then return {} end
+      local out = {}
+      for _, it in ipairs(items) do
+        local entry = { title = it.AXTitle or "" }
+        if it.AXChildren and depth > 1 then
+          entry.children = trim(it.AXChildren[1] or {}, depth - 1)
+        end
+        table.insert(out, entry)
+      end
+      return out
+    end
+    return jsonOk({ ok = true, menus = trim(menu, 2) })
   else
     return jsonErr(404, "not_found")
   end
