@@ -221,6 +221,14 @@ local function dispatch(method, path, _, body)
     print("[figma-ai-bridge] /v1/cmd-slash: sending Cmd+/ via eventtap")
     hs.eventtap.keyStroke({ "cmd" }, "/")
     return jsonOk({ ok = true })
+  elseif method == "POST" and path == "/v1/open-actions" then
+    -- 메뉴만 열고 타이핑 없음 — Quick Actions가 진짜 뜨는지 시각 확인용
+    local figma = findFigma()
+    if not figma then return jsonErr(409, "figma_not_running") end
+    figma:activate(); sleepMs(300)
+    local ok = figma:selectMenuItem({ "Figma", "Actions…" })
+    print(string.format("[figma-ai-bridge] /v1/open-actions selectMenuItem → %s", tostring(ok)))
+    return jsonOk({ ok = true, menu_invoked = ok })
   elseif method == "POST" and path == "/v1/menu-dump" then
     -- Figma의 메뉴 트리를 덤프 → 통신 자체가 되는지 + 'Remove background' 메뉴 위치 확인
     local figma = findFigma()
