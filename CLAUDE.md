@@ -60,6 +60,7 @@ CdBd 디자인 서비스는 CdBd 멀티페이지로 **룩북·카탈로그** 콘
 - **03 swp BG 서브타이틀 = 컬렉션명**(예: `26 SS Collection`).
 - **배경 가공만 Figma AI를 사용**한다 — **배경 삭제(`Remove background`) · 배경 늘림(확장/생성형 fill)** 등. 로컬 rembg/BiRefNet 등 외부 ML은 쓰지 않는다. ⚠️ Figma AI는 **에디터 전용**이라 자동화 API(`use_figma`)로 호출 불가(`createImage`/`getImageByHash`만 존재) → 에디터에서 적용(필요 시 사용자에게 요청)한 결과로 진행.
 - **로고·누끼 이미지 처리**: 로고와 상품 누끼는 둘 다 **「배경 제거 + 여백 없이 + 원본 비율」**로 사용. 배경이 있으면 Figma AI(Remove background)를 **사용자에게 요청**(에디터 전용). **이미 배경이 없는 경우(SVG · 투명 PNG 등)는 요청하지 않고 그대로 사용** — 업로드 직후 alpha 채널 유무를 먼저 확인. 적용 범위: 시안·초안 모든 페이지(01·02·표지·OG·03 swp/scl) 공통. 상세: [[2-1. 공통]] 「로고·누끼 이미지 처리」.
+- ⚠️ **누끼 alpha bbox 크롭은 swp/scl 빌드의 필수 사전 단계**: Remove background만으로는 캔버스 크기가 유지되어 PNG에 alpha=0 여백이 남는다. **PIL `getbbox()` + `crop()`으로 잘라낸 PNG를 재업로드해 fill 교체**해야 cell 내 상품 면적이 균등해진다. 워크플로우 5단계(export→getbbox→crop→re-upload→fill swap) + RECT 동일 면적 공식(w=√(S·a), h=√(S/a)) 상세는 [[2-4. 화보·상품]] 「공통 — 상품 누끼 alpha bbox 크롭」 / [[2-1. 공통]] 「로고·누끼 이미지 처리」.
 - **그 외 가공(리사이즈·위치 조정·scaleMode·imageTransform·crop 등)은 기존대로 `use_figma`로 처리**한다 (AI 아님).
 - 정확한 픽셀값보다 **범용 비율·여백**으로 기재 (로고 규격은 브랜드마다 다름)
 
