@@ -221,6 +221,22 @@ local function dispatch(method, path, _, body)
     local ok = figma:selectMenuItem({ "Figma", "Actions…" })
     print(string.format("[figma-ai-bridge] /v1/open-actions selectMenuItem → %s", tostring(ok)))
     return jsonOk({ ok = true, menu_invoked = ok })
+  elseif method == "POST" and path == "/v1/open-then-type" then
+    -- 메뉴 열고 → 긴 대기 → 타이핑 (NO ENTER) — 텍스트가 어디로 가는지 시각 확인
+    local figma = findFigma()
+    if not figma then return jsonErr(409, "figma_not_running") end
+    local q = (parsed and parsed.text) or "remove background"
+    local wait_ms = (parsed and parsed.wait_ms) or 1500
+    local prev = ensureEnglishInput()
+    figma:activate(); sleepMs(300)
+    local ok = figma:selectMenuItem({ "Figma", "Actions…" })
+    print(string.format("[figma-ai-bridge] /open-then-type menu→%s, waiting %dms", tostring(ok), wait_ms))
+    sleepMs(wait_ms)
+    print(string.format("[figma-ai-bridge] typing now: %q", q))
+    hs.eventtap.keyStrokes(q)
+    print("[figma-ai-bridge] typing done — no Enter sent")
+    restoreInputSource(prev)
+    return jsonOk({ ok = true, typed = q, menu_invoked = ok })
   elseif method == "POST" and path == "/v1/menu-dump" then
     -- Figma의 메뉴 트리를 덤프 → 통신 자체가 되는지 + 'Remove background' 메뉴 위치 확인
     local figma = findFigma()
