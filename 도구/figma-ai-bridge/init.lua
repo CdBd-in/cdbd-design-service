@@ -100,23 +100,15 @@ local function runQuickAction(query)
     restoreInputSource(prev)
     return false, "actions_menu_not_found"
   end
-  sleepMs(500)  -- Quick Actions 패널 열림 + 검색창 포커스 대기
+  print("[figma-ai-bridge] menu invoked, waiting for search box focus")
+  sleepMs(1200)  -- Quick Actions 패널 열림 + 검색창 포커스 대기 (보수적)
 
-  -- 검색어 입력 (Quick Actions 검색창에 들어감)
-  local q = escapeAS(query)
-  local typeScript = string.format([[
-    tell application "System Events"
-      delay 0.1
-      keystroke "%s"
-      delay 0.30
-      key code 36
-    end tell
-  ]], q)
-  print("[figma-ai-bridge] typing query into Actions box: " .. q)
-  local okScript, _, raw = hs.osascript.applescript(typeScript)
-  if not okScript then
-    print("[figma-ai-bridge] AppleScript error: " .. tostring(raw))
-  end
+  -- 키스트로크는 hs.eventtap.keyStrokes 직접 사용 (현재 포커스된 요소로)
+  -- AppleScript System Events 대신 native eventtap 사용 — IME는 이미 영문으로 전환
+  print("[figma-ai-bridge] typing query via eventtap.keyStrokes: " .. query)
+  hs.eventtap.keyStrokes(query); sleepMs(400)
+  print("[figma-ai-bridge] sending Return via eventtap")
+  hs.eventtap.keyStroke({}, "return")
   restoreInputSource(prev)
   return true
 end
