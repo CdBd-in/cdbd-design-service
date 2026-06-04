@@ -1,9 +1,9 @@
 {
   "id": "conv-1780540624821-up6ril99a",
   "providerId": "claude",
-  "title": "https://www",
-  "titleGenerationStatus": "pending",
+  "title": "매장정보 프레임명 표준화 및 규칙 추가",
+  "titleGenerationStatus": "success",
   "createdAt": 1780540624821,
-  "updatedAt": 1780540624825,
+  "updatedAt": 1780540636724,
   "sessionId": null
 }
