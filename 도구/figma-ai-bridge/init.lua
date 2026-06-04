@@ -68,8 +68,14 @@ local function handleHealth()
   return jsonOk({
     ok = true,
     figma_running = findFigma() ~= nil,
+    accessibility_granted = hs.accessibilityState(),
     version = VERSION,
   })
+end
+
+local function handleReload()
+  hs.timer.doAfter(0.2, function() hs.reload() end)
+  return jsonOk({ ok = true, reloading_in_ms = 200 })
 end
 
 local function handleRemoveBg(body)
@@ -117,6 +123,8 @@ local function dispatch(method, path, _, body)
     return handleRemoveBg(parsed)
   elseif method == "POST" and path == "/v1/extend-bg" then
     return handleExtendBg(parsed)
+  elseif method == "POST" and path == "/v1/reload" then
+    return handleReload()
   else
     return jsonErr(404, "not_found")
   end
