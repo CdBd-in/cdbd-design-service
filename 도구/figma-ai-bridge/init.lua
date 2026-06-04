@@ -53,13 +53,39 @@ local function activateFigma()
   return true
 end
 
+-- 영문 입력 소스 강제 (한국어 IME 등에서 query 글자가 한글로 변환되는 것 방지)
+local function ensureEnglishInput()
+  local layout = hs.keycodes.currentLayout()
+  print(string.format("[figma-ai-bridge] current layout: %s", tostring(layout)))
+  if layout ~= "ABC" and layout ~= "U.S." and layout ~= "US" then
+    print("[figma-ai-bridge] switching to ABC layout")
+    hs.keycodes.setLayout("ABC")
+    sleepMs(150)
+    print(string.format("[figma-ai-bridge] now layout: %s", tostring(hs.keycodes.currentLayout())))
+    return layout
+  end
+  return nil
+end
+
+local function restoreInputSource(prev)
+  if prev then
+    print(string.format("[figma-ai-bridge] restoring layout: %s", prev))
+    hs.keycodes.setLayout(prev)
+  end
+end
+
 -- Quick Actions(Cmd+/) 호출 → 검색어 입력 → Enter
 -- ⚠️ Escape는 Figma 선택을 해제하므로 절대 쓰지 않는다.
 -- 호출자(Claude/use_figma)가 직전에 선택을 깔끔히 세팅한 상태를 가정한다.
 local function runQuickAction(query)
-  hs.eventtap.keyStroke({ "cmd" }, "/"); sleepMs(220) -- Quick Actions 열림 대기
-  hs.eventtap.keyStrokes(query);        sleepMs(150) -- 필터 안정화
+  local prev = ensureEnglishInput()
+  print("[figma-ai-bridge] sending Cmd+/")
+  hs.eventtap.keyStroke({ "cmd" }, "/"); sleepMs(280)
+  print(string.format("[figma-ai-bridge] typing query: %q", query))
+  hs.eventtap.keyStrokes(query);          sleepMs(180)
+  print("[figma-ai-bridge] sending Return")
   hs.eventtap.keyStroke({}, "return")
+  restoreInputSource(prev)
 end
 
 ----------------------------------------------------------------
