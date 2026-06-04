@@ -4,8 +4,8 @@
   "title": "매장정보 프레임명 표준화 및 규칙 추가",
   "titleGenerationStatus": "success",
   "createdAt": 1780540624821,
-  "updatedAt": 1780559142101,
-  "lastResponseAt": 1780559142101,
+  "updatedAt": 1780559361919,
+  "lastResponseAt": 1780559361919,
   "sessionId": "b0df3ead-cffe-483a-97d1-ea4480992e6e",
   "providerState": {
     "providerSessionId": "b0df3ead-cffe-483a-97d1-ea4480992e6e"
@@ -13,11 +13,11 @@
   "usage": {
     "model": "opus",
     "inputTokens": 1,
-    "cacheCreationInputTokens": 1813,
-    "cacheReadInputTokens": 801604,
+    "cacheCreationInputTokens": 3679,
+    "cacheReadInputTokens": 803868,
     "contextWindow": 1000000,
-    "contextTokens": 803418,
-    "percentage": 80,
+    "contextTokens": 807548,
+    "percentage": 81,
     "contextWindowIsAuthoritative": true
   }
 }
