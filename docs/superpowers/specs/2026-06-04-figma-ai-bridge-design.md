@@ -221,3 +221,76 @@ cd 도구/figma-ai-bridge && ./install.sh
 | 노드 선택은 use_figma 담당, 데몬은 AI 트리거만 | 데몬이 노드 ID 받아 선택까지 | 책임 분리, 데몬 단순화, Plugin API와 중복 안 함 |
 | 두 기능 (Remove BG + Extend) 동시 지원 | Remove BG MVP 우선 | 사용자 요청. 명령 구조 거의 동일해 비용 적음 |
 | 이 레포에 보관 | 별도 레포 / `~/.hammerspoon/` 직접 | 브랜드 워크플로우와 한 곳에서 버전 관리, 설치는 심볼릭 링크로 분리 |
+
+---
+
+## 13. Post-Mortem — 왜 중단했나 (2026-06-04 추가)
+
+### 진행 경과
+
+1. 스펙 승인 → Hammerspoon 데몬 MVP 구현 (`도구/figma-ai-bridge/init.lua`, ~190줄)
+2. Hammerspoon 1.1.1 설치, Accessibility + Input Monitoring 권한 부여
+3. `localhost:39632/v1/health` 정상 응답 (`figma_running: true, accessibility_granted: true`)
+4. 마쥬 SS26 05번 누끼 1장(`Maje_MFPRO04658-10_F_P.jpg`)으로 통합 테스트 시도 6회
+
+### 실패 패턴 (재현)
+
+매 시도마다 동일한 증상:
+- 데몬 HTTP는 200 응답, `elapsed_ms` 정상
+- `selectMenuItem({"Figma", "Actions…"})`는 성공 — Quick Actions 패널이 실제로 열림 (사용자 시각 확인)
+- 그러나 패널 열린 직후 `keyStrokes("remove background")`가 검색창에 도달하지 못함
+- 사용자 선택은 매번 해제됨 (R 키로 Rectangle Tool 활성화 → 캔버스에 도형 생성)
+- Figma의 노드 `fills`에 변화 없음 (Remove BG 미적용 확정)
+
+### 진단 경로 (시도 → 결과)
+
+| 시도 | 결과 |
+|---|---|
+| `hs.eventtap.keyStroke({"cmd"}, "/")` | Cmd+/ 가 Figma에 도달은 했으나 Quick Actions 안 뜸 |
+| Escape 키 제거 | 선택 해제 1회 줄었지만 여전히 실패 |
+| 한국어 IME → ABC 강제 전환 (`hs.keycodes.setLayout("ABC")`) | 로그 확인됨, 그러나 결과 변화 없음 |
+| AppleScript `tell process "Figma" / keystroke "/" using command down` | 오류 없음, 결과 변화 없음 |
+| `selectMenuItem({"Figma", "Actions…"})` + `keyStrokes(...)` | 메뉴는 열림, 타이핑은 캔버스로 |
+| 대기 시간 500ms → 1200ms로 증가 | 결과 변화 없음 |
+
+### 진짜 원인
+
+**macOS 키스트로크 자동화는 타겟 앱이 frontmost일 때만 동작.** Hammerspoon `hs.eventtap`도, AppleScript System Events `keystroke`도 동일. 이건 macOS 보안 모델 자체의 설계.
+
+본 스펙의 핵심 가정 — "Claude가 백그라운드에서 데몬 호출 → 데몬이 Figma에 키스트로크 → AI 실행" — 이 macOS 차원에서 성립 불가. 데몬이 Figma를 `activate()`해도 키스트로크가 발사되는 그 순간 다른 앱(Cursor/Hammerspoon Console/Terminal 등)이 frontmost이면 키는 거기로 감.
+
+### 사용자 결정 (그리고 그 정당성)
+
+사용자 인용:
+
+> "피그마 창을 항상 최상단에 두고 다른 곳에 포커스도 하면 안되면 내가 너한테 자동화를 맡기는 이유가 없어. 너가 업무를 처리하는 동안 난 다른 동작을 해야해."
+
+자동화의 본질은 사용자 컨텍스트 스위치를 없애는 것. 키스트로크 방식은 작업 시간 동안 사용자가 Figma 외 모든 입력을 멈춰야 하므로 본질 위반.
+
+### 검토한 우회 경로 (모두 기각)
+
+| 경로 | 기각 사유 |
+|---|---|
+| 외부 AI API (remove.bg / Replicate BiRefNet) | CLAUDE.md "Figma AI만 사용" 정책 위반. 사용자가 정책 완화 거부. |
+| Hammerspoon `hs.axuielement`로 Figma 검색창 AX 경로 직접 set | R&D 1~2시간 + Figma의 AX 노출도 미지수. ROI 낮음. |
+| 현 수동 워크플로우 유지 | ✅ 채택. 누끼 가공만 수동, 그 외는 use_figma로 이미 자동화됨. |
+
+### 부수 산출물
+
+- **Figma Remove BG의 출력 형식 발견** (스펙 외 가치): Remove BG는 `imageHash`를 바꾸지 않고 **두 번째 `IMAGE` fill 레이어를 추가**한다 (원본은 `visible: false`로 숨김, 새 fill은 새 imageHash + `visible: true`). 향후 fills 기반 검증 코드를 쓸 때 참고.
+- **Figma Quick Actions 메뉴 경로**: `Main Menu → Figma → "Actions…"` (U+2026 ellipsis 포함). `selectMenuItem`으로 백그라운드 호출 가능.
+
+### 향후 재개 조건 (참고)
+
+본 스펙을 다시 살려 구현할 가치가 생기는 시나리오:
+1. Figma가 Plugin API에 AI 기능 노출 (현재 미노출)
+2. CLAUDE.md "Figma AI만 사용" 정책 완화 결정 → 외부 API 채택
+3. macOS UI 자동화 권한 모델이 백그라운드 키스트로크 허용으로 변경 (가능성 낮음)
+4. `hs.axuielement` R&D 결과 Figma Quick Actions 검색창이 AX로 set value 가능함 확인
+
+### 산출물 처리
+
+- `도구/figma-ai-bridge/` (init.lua, install.sh, test.sh, README.md): 유지 또는 삭제 — 사용자 결정 사항. 유지하면 향후 재개 시 출발점 + 학습 자료. 삭제하면 레포 단순화.
+- 본 스펙 문서: 유지 (의사결정 기록).
+- `/Applications/Hammerspoon.app`: 사용자 결정 사항 (이 프로젝트만을 위해 설치한 25MB 앱).
+- `~/.hammerspoon/init.lua`: 제거됨 (2026-06-04).
