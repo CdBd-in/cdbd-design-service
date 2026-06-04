@@ -191,6 +191,9 @@ local function dispatch(method, path, _, body)
     local q = (parsed and parsed.text) or "TEST"
     typeTest(q)
     return jsonOk({ ok = true, typed = q })
+  elseif method == "POST" and path == "/v1/open-console" then
+    hs.openConsole()
+    return jsonOk({ ok = true })
   else
     return jsonErr(404, "not_found")
   end
