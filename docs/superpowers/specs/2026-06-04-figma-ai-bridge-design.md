@@ -288,9 +288,11 @@ cd 도구/figma-ai-bridge && ./install.sh
 3. macOS UI 자동화 권한 모델이 백그라운드 키스트로크 허용으로 변경 (가능성 낮음)
 4. `hs.axuielement` R&D 결과 Figma Quick Actions 검색창이 AX로 set value 가능함 확인
 
-### 산출물 처리
+### 산출물 처리 (2026-06-04 확정)
 
-- `도구/figma-ai-bridge/` (init.lua, install.sh, test.sh, README.md): 유지 또는 삭제 — 사용자 결정 사항. 유지하면 향후 재개 시 출발점 + 학습 자료. 삭제하면 레포 단순화.
-- 본 스펙 문서: 유지 (의사결정 기록).
-- `/Applications/Hammerspoon.app`: 사용자 결정 사항 (이 프로젝트만을 위해 설치한 25MB 앱).
-- `~/.hammerspoon/init.lua`: 제거됨 (2026-06-04).
+- `도구/figma-ai-bridge/` (init.lua, install.sh, test.sh, README.md): **삭제됨**. `도구/` 폴더가 비어 함께 제거.
+- 본 스펙 문서: **유지** (의사결정 기록, 향후 재개 시 진단 자료).
+- `/Applications/Hammerspoon.app`: **유지** (사용자 결정 — 추후 macOS 자동화 용도).
+- `~/.hammerspoon/init.lua` 심볼릭 링크: **제거됨**.
+- `~/.hammerspoon/Spoons/`: 유지 (Hammerspoon 기본 구조).
+- Figma 파일 `SI36czRu3lBgkPzyrnPYkB`의 테스트 노드(`16471:330`, `16472:330`, `16500:330`): 모두 정리 확인.
