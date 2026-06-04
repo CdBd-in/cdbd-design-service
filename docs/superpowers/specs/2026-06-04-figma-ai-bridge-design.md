@@ -117,18 +117,26 @@ CdBd 디자인 서비스의 시안·초안 제작은 `use_figma` MCP 자동화�
 
 ### 5.3 Claude 측 통합
 
-- **새 유틸리티 함수** (use_figma 호출 사이트마다 인라인 또는 helper):
-  - `triggerFigmaRemoveBG(nodeId)`: 노드 선택 → HTTP POST → 응답 → export 검증 → 재시도 또는 fallback
-- **CLAUDE.md 업데이트** (별도 PR 또는 같은 PR):
-  - 「로고·누끼 이미지 처리」: "에디터 전용이라 자동화 불가" → "기본은 자동화, 데몬 미설치 시 수동"
-  - 「⚠️ 누끼 가공은 블록(blocking) 단계」: 자동화로 unblock, fallback 명시
-  - 「Figma 작업 규칙」: `figma-ai-bridge` 사전 점검 단계 추가 (워크플로우 시작 시 `/v1/health` 콜)
-- **시안 Step 6 자동화 분기**:
-  1. 누끼 업로드 + alpha 채널 확인
-  2. alpha 없음 → `figma-ai-bridge` health 체크
-  3. 데몬 정상 → `triggerFigmaRemoveBG` 자동 실행
-  4. 데몬 응답 없음/검증 실패 → 사용자에게 수동 요청 (현 워크플로우 회귀)
-  5. 완료 후 swp/scl 셀 빌드 계속
+**호출 방식**: Claude는 새 MCP 도구를 추가하지 않고, 기존 **Bash 도구로 `curl`을 직접 호출**한다. use_figma 안의 plugin JS는 fetch를 쓰지 않는다 (책임 분리 + use_figma의 권한 모델 변경 없음).
+
+**오케스트레이션 흐름** (Claude가 순차 실행):
+1. `use_figma` — 대상 노드를 `figma.currentPage.selection`에 설정 + 페이지를 frontmost로 이동
+2. `Bash` — `curl -sS -X POST http://127.0.0.1:39632/v1/remove-bg -d '{"timeout_ms":5000}' -H 'Content-Type: application/json'`
+3. `use_figma` — `exportAsync(PNG)` → 응답 PNG의 alpha 채널 확인
+4. alpha 없음 → 2를 timeout 1.5배로 재시도 1회
+5. 그래도 실패 → 사용자에게 수동 요청 (현 워크플로우 회귀)
+
+**CLAUDE.md 업데이트** (같은 PR로 묶음):
+- 「로고·누끼 이미지 처리」: "에디터 전용이라 자동화 불가" → "기본은 자동화(데몬 사용), 데몬 미설치/실패 시 수동"
+- 「⚠️ 누끼 가공은 블록(blocking) 단계」: "자동화 데몬 동작 시 unblock, fallback 경로 명시"
+- 「Figma 작업 규칙」 끝에 새 섹션 추가: `figma-ai-bridge` 사전 점검 (워크플로우 시작 시 `curl /v1/health` 1회, 결과에 따라 자동 분기)
+
+**시안 Step 6 자동화 분기** (위 흐름이 기본, fallback은 현 워크플로우 그대로):
+1. 누끼 업로드 + alpha 채널 확인
+2. alpha 없음 → `curl /v1/health` 200 + `figma_running: true`?
+3. 예 → 위 오케스트레이션 흐름 실행
+4. 아니오 또는 실패 → 사용자에게 수동 요청 ([[1-2. 시안]] 기존 워크플로우 그대로)
+5. 완료 후 swp/scl 셀 빌드 계속
 
 ## 6. 워크플로우 비교
 
