@@ -61,7 +61,6 @@ local function ensureEnglishInput()
     print("[figma-ai-bridge] switching to ABC layout")
     hs.keycodes.setLayout("ABC")
     sleepMs(150)
-    print(string.format("[figma-ai-bridge] now layout: %s", tostring(hs.keycodes.currentLayout())))
     return layout
   end
   return nil
@@ -74,17 +73,53 @@ local function restoreInputSource(prev)
   end
 end
 
+-- AppleScript escape: " → \", \ → \\
+local function escapeAS(s)
+  return (s:gsub("\\", "\\\\"):gsub('"', '\\"'))
+end
+
 -- Quick Actions(Cmd+/) 호출 → 검색어 입력 → Enter
+-- 방식: System Events keystroke (raw eventtap보다 견고; 포커스 + IME 안정)
 -- ⚠️ Escape는 Figma 선택을 해제하므로 절대 쓰지 않는다.
--- 호출자(Claude/use_figma)가 직전에 선택을 깔끔히 세팅한 상태를 가정한다.
 local function runQuickAction(query)
   local prev = ensureEnglishInput()
-  print("[figma-ai-bridge] sending Cmd+/")
-  hs.eventtap.keyStroke({ "cmd" }, "/"); sleepMs(280)
-  print(string.format("[figma-ai-bridge] typing query: %q", query))
-  hs.eventtap.keyStrokes(query);          sleepMs(180)
-  print("[figma-ai-bridge] sending Return")
-  hs.eventtap.keyStroke({}, "return")
+  local q = escapeAS(query)
+  local script = string.format([[
+    tell application "System Events"
+      tell process "Figma"
+        set frontmost to true
+        delay 0.25
+        keystroke "/" using command down
+        delay 0.55
+        keystroke "%s"
+        delay 0.30
+        key code 36   -- Return
+      end tell
+    end tell
+  ]], q)
+  print("[figma-ai-bridge] runQuickAction via AppleScript, query=" .. q)
+  local ok, _, raw = hs.osascript.applescript(script)
+  if not ok then
+    print("[figma-ai-bridge] AppleScript error: " .. tostring(raw))
+  end
+  restoreInputSource(prev)
+end
+
+-- 디버그: Figma에 단순 문자열만 입력 (Cmd+/ 없음, Enter 없음)
+local function typeTest(query)
+  local prev = ensureEnglishInput()
+  local q = escapeAS(query or "TEST")
+  local script = string.format([[
+    tell application "System Events"
+      tell process "Figma"
+        set frontmost to true
+        delay 0.25
+        keystroke "%s"
+      end tell
+    end tell
+  ]], q)
+  print("[figma-ai-bridge] typeTest via AppleScript, query=" .. q)
+  hs.osascript.applescript(script)
   restoreInputSource(prev)
 end
 
@@ -152,6 +187,10 @@ local function dispatch(method, path, _, body)
     return handleExtendBg(parsed)
   elseif method == "POST" and path == "/v1/reload" then
     return handleReload()
+  elseif method == "POST" and path == "/v1/type-test" then
+    local q = (parsed and parsed.text) or "TEST"
+    typeTest(q)
+    return jsonOk({ ok = true, typed = q })
   else
     return jsonErr(404, "not_found")
   end
