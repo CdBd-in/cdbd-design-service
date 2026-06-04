@@ -162,7 +162,10 @@ local function handleRemoveBg(body)
   end
   local timeout = (body and body.timeout_ms) or DEFAULT_REMOVE_BG_TIMEOUT_MS
   local t0 = nowMs()
-  runQuickAction(REMOVE_BG_QUERY)
+  local ok, err = runQuickAction(REMOVE_BG_QUERY)
+  if not ok then
+    return jsonErr(500, err or "quick_action_failed")
+  end
   sleepMs(timeout)
   return jsonOk({ ok = true, elapsed_ms = math.floor(nowMs() - t0) })
 end
