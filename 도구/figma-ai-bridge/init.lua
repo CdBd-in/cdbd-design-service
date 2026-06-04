@@ -54,10 +54,11 @@ local function activateFigma()
 end
 
 -- Quick Actions(Cmd+/) 호출 → 검색어 입력 → Enter
+-- ⚠️ Escape는 Figma 선택을 해제하므로 절대 쓰지 않는다.
+-- 호출자(Claude/use_figma)가 직전에 선택을 깔끔히 세팅한 상태를 가정한다.
 local function runQuickAction(query)
-  hs.eventtap.keyStroke({}, "escape"); sleepMs(50)   -- 잔재 패널 닫기
-  hs.eventtap.keyStroke({ "cmd" }, "/"); sleepMs(180) -- 메뉴 열림 대기
-  hs.eventtap.keyStrokes(query);        sleepMs(120) -- 필터 안정화
+  hs.eventtap.keyStroke({ "cmd" }, "/"); sleepMs(220) -- Quick Actions 열림 대기
+  hs.eventtap.keyStrokes(query);        sleepMs(150) -- 필터 안정화
   hs.eventtap.keyStroke({}, "return")
 end
 
