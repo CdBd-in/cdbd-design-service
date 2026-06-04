@@ -4,8 +4,8 @@
   "title": "Build Figma plugin for AI image processing",
   "titleGenerationStatus": "success",
   "createdAt": 1780544749572,
-  "updatedAt": 1780554049804,
-  "lastResponseAt": 1780554049804,
+  "updatedAt": 1780555207473,
+  "lastResponseAt": 1780555207473,
   "sessionId": "08bd3811-147a-4361-b8e2-3a33993e379e",
   "providerState": {
     "providerSessionId": "08bd3811-147a-4361-b8e2-3a33993e379e"
@@ -14,11 +14,11 @@
   "usage": {
     "model": "opus",
     "inputTokens": 1,
-    "cacheCreationInputTokens": 476,
-    "cacheReadInputTokens": 224997,
+    "cacheCreationInputTokens": 252,
+    "cacheReadInputTokens": 246095,
     "contextWindow": 1000000,
-    "contextTokens": 225474,
-    "percentage": 23,
+    "contextTokens": 246348,
+    "percentage": 25,
     "contextWindowIsAuthoritative": true
   }
 }
