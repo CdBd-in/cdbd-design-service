@@ -4,6 +4,21 @@
   "title": "Clarify changelog section purpose",
   "titleGenerationStatus": "success",
   "createdAt": 1780620042878,
-  "updatedAt": 1780620053455,
-  "sessionId": null
+  "updatedAt": 1780620137088,
+  "lastResponseAt": 1780620137088,
+  "sessionId": "a8ba5bd5-7d03-4b6a-bb30-d8f842af49b9",
+  "providerState": {
+    "providerSessionId": "a8ba5bd5-7d03-4b6a-bb30-d8f842af49b9"
+  },
+  "currentNote": "룩북/1. 제작 프로세스/1-4. CdBd 콘텐츠.md",
+  "usage": {
+    "model": "opus",
+    "inputTokens": 1,
+    "cacheCreationInputTokens": 1952,
+    "cacheReadInputTokens": 52291,
+    "contextWindow": 1000000,
+    "contextTokens": 54244,
+    "percentage": 5,
+    "contextWindowIsAuthoritative": true
+  }
 }
