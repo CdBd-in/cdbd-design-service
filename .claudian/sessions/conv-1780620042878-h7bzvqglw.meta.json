@@ -4,8 +4,8 @@
   "title": "Clarify changelog section purpose",
   "titleGenerationStatus": "success",
   "createdAt": 1780620042878,
-  "updatedAt": 1780631139028,
-  "lastResponseAt": 1780631139028,
+  "updatedAt": 1780631232922,
+  "lastResponseAt": 1780631232922,
   "sessionId": "a8ba5bd5-7d03-4b6a-bb30-d8f842af49b9",
   "providerState": {
     "providerSessionId": "a8ba5bd5-7d03-4b6a-bb30-d8f842af49b9"
@@ -14,11 +14,11 @@
   "usage": {
     "model": "opus",
     "inputTokens": 1,
-    "cacheCreationInputTokens": 414,
-    "cacheReadInputTokens": 259421,
+    "cacheCreationInputTokens": 2197,
+    "cacheReadInputTokens": 267709,
     "contextWindow": 1000000,
-    "contextTokens": 259836,
-    "percentage": 26,
+    "contextTokens": 269907,
+    "percentage": 27,
     "contextWindowIsAuthoritative": true
   }
 }
