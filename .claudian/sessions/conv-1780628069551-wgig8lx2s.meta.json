@@ -4,8 +4,8 @@
   "title": "Fix Figma model sizing and product alignment",
   "titleGenerationStatus": "success",
   "createdAt": 1780628069563,
-  "updatedAt": 1780644626135,
-  "lastResponseAt": 1780644626135,
+  "updatedAt": 1780647489209,
+  "lastResponseAt": 1780647489209,
   "sessionId": "9b4aaf91-e53c-491f-9b96-9f3608f07a9f",
   "providerState": {
     "providerSessionId": "9b4aaf91-e53c-491f-9b96-9f3608f07a9f"
@@ -14,11 +14,10 @@
   "usage": {
     "model": "opus",
     "inputTokens": 1,
-    "cacheCreationInputTokens": 111,
-    "cacheReadInputTokens": 221204,
-    "contextWindow": 1000000,
-    "contextTokens": 221316,
-    "percentage": 22,
-    "contextWindowIsAuthoritative": true
+    "cacheCreationInputTokens": 16462,
+    "cacheReadInputTokens": 365821,
+    "contextWindow": 200000,
+    "contextTokens": 382284,
+    "percentage": 100
   }
 }
