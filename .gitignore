@@ -15,3 +15,4 @@
 # 에이전트 도구 임시 상태
 .superpowers/
 .gstack/
+.claudian/
