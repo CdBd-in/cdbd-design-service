@@ -15,7 +15,7 @@
 
 ---
 
-## 오늘 완료한 작업 (2026-06-17)
+## 오늘 완료한 작업 (2026-06-11)
 
 ### A. 메이크뷰 → CdBd 카드 매핑 분석 (4페이지 분량)
 
@@ -244,7 +244,7 @@ Pages
 | editor id | `4778` |
 | title | `KUBOTA` |
 | user_id | `523daa95-b43d-4a13-9919-e5ce7c097e06` |
-| editor_data INSERT 시각 | 2026-06-11 07:26:00 UTC (실 작업일) |
+| editor_data INSERT 시각 | 2026-06-11 07:26:00 UTC |
 | row_id | `8dc84005-c4dc-40c3-b7f9-b0a518cbe6c5` |
 | paid_rows | `[]` (URL 생성 안 됨) |
 
