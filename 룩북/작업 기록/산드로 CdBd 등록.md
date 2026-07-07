@@ -4,6 +4,12 @@
 > 대상: 산드로(SANDRO) **초안** 룩북 → CdBd 멀티페이지 에디터 **4984**
 > 상태: **14페이지 draft 등록 완료 · 게시(라이브) 전 · 사용자 검토 대기**
 
+> **[2026-07-07 추가 작업]** 남성(옴므) 상품 링크 연결 + 갤러리 카드 디자인 수정 완료 (draft PATCH, 게시 전).
+> - **09~13 갤러리 아이템 48개에 상품 URL 링크** = `gallery.images[i].linkButton {type:"url",link:{href,openNewTab:true}}` (JS 번들 5784 실측 검증 키). 셀→품번 매핑은 셀 이미지에 합본된 상품명+가격+색상으로 확정(엑셀 `_ _ _ 룩 EDM…` `EDM 구성(SH-순서변경버전)_최종` URL 블록). 검수: 도메인몰(ssfshop) 42개 = 페이지 title에 품번 임베드 확인(100%), 국제몰(sandro-paris) 6개 = 엑셀 지정 slug 그대로. 09-2-8/10-2-9/10-2-10/12-2-1/12-2-9/12-2-10 = 국제몰.
+> - **02~06 + 09~13 갤러리 카드 10개**: 배경 투명화 = `backgroundImage.enabled=false` (0N-2-BG #FAFAFA+서브타이틀 비노출, url은 보존—재활성 가능) / **상단 여백** = `style.padding "40px 24px 32px" → "24px 24px 32px"` (top 40→24, 사용자 지시).
+> - Supabase refresh_token 재발급: `.env`(cdbd-templates) CDBD_EMAIL/PASSWORD로 password-grant 로그인 → credentials.json 갱신. (worklog §6 소진 이슈 해결)
+> - 게시는 여전히 사용자 UI 위임(14P > base quota). `editor_published` 미동기화 유지.
+
 ---
 
 ## 1. 한 줄 요약
